@@ -1,48 +1,76 @@
-# Import Sketch 3 files
-$ = Framer.Importer.load "imported/mixcloudframer"
+# sketch file
+$ = Framer.Importer.load("imported/mixcloudframer@1x")
 
-bg = new BackgroundLayer 
-	backgroundColor: '#314359'
+# import web fonts
+Utils.insertCSS('@import url(https://fonts.googleapis.com/css?family=Open+Sans:600);')
 
-logincontainer = $.logincontainer
-logincontainer.center()
-logincontainer.states.add
-	on:
-		x: Screen.width / 2 - logincontainer.midX 
-logincontainer.states.animationOptions = curve:"spring(200,15,0)"
+# background layer
+bg = new BackgroundLayer
+	backgroundColor: '314359'
 
-inputsFirst = $.inputsfirst
+# view positioning
+view = $.view
+view.x = 0
 
-inputsFirst.states.add
-	off: 
-		opacity: 0
-		
-inputsSecond = $.inputssecond
-inputsSecond.opacity = 0
+# center the view
+view.center()
 
-inputsSecond.states.add
-	off:
-		opacity: 1
+# Create the title for the current view
+viewHeading = new Layer
+	width: view.width
+	superLayer: view
+	height: 40
+	y: $.main.minY - 85
+	backgroundColor: bg.backgroundColor
+	html: "Choose how to login"
 
-left = $.left
-left.states.add
-	off:
-		opacity: 0
-left.states.animationOptions = curve:"spring(200,15,0)"
+viewHeading.style =
+	'font': '22px/16px Open Sans'
+	'text-align': 'center'
+	
+viewHeading.states.add
+	passwordHeading:
+		html: "Welcome back,"
+	userHeading:
+		html: "Choose how to login"
 
-right = $.right
-
-
+# Create the input for username and password
 textInputLayer = new Layer 
-	x:27
-	y: $.Or.maxY + 108
-	z: 1
-	width:292
-	height:40
-	superLayer: right
+	x: 37
+	y: $.or.maxY + 40
+	width: 258
+	height: 40
+	superLayer: view
 	borderWidth: 1
 	borderColor: "#D3D3D3"
-					
+	
+inputLabel = new Layer
+	superLayer: view
+	x: 37
+	y: $.or.maxY + 80
+	size: textInputLayer.size
+	backgroundColor: 'rgba(0,0,0,0)'
+	opacity: 0
+	color: "#25292B"
+	
+inputLabel.states.add
+	userNameLabel:
+		scale: 0.91
+		x: 8
+		y: textInputLayer.y - 30
+		opacity: 1
+		html: "Username or email"
+	passwordLabel:
+		scale: 0.91
+		x: 8
+		y: textInputLayer.y - 30
+		opacity: 1
+		html: "Password"
+	
+inputLabel.style["font-family"] = "Open Sans"
+inputLabel.style["font-size"] = "12px"	
+inputLabel.style["padding"] = "7px 0 0 20px"	
+		
 textInputLayer.ignoreEvents = false
 
 textInputLayer.states.add
@@ -55,13 +83,81 @@ textInputLayer.style = {"border" : "1px solid #D3D3D3"}
 inputElement = document.createElement("input")
 inputElement.style["width"]  = "#{textInputLayer.width}px"
 inputElement.style["height"] = "#{textInputLayer.height}px"
-inputElement.style["font"] = "12px/22px Helvetica"
+inputElement.style["font"] = "12px/22px Open Sans"
 inputElement.style["-webkit-user-select"] = "text"
 inputElement.style["padding-left"] = "20px"
 inputElement.style["outline"] = "none"
 
 inputType = "username"
 
+# create submit button
+buttonConfirm = new Layer
+	superLayer: view
+	size: textInputLayer.size
+	y: textInputLayer.maxY + 20
+	x: textInputLayer.x
+	# is not the correct colour. inspect later
+	backgroundColor: '#589FC3'
+	
+buttonText = new Layer
+	size: buttonConfirm.size
+	superLayer: buttonConfirm
+	html: 'Confirm'
+	
+buttonText.style =
+	'padding': '8px 0 0 0'
+	'text-align': 'center'
+	'font': '14px/22px Open Sans'
+	'font-weight': 'bold'
+	
+buttonText.states.add
+	hidden:
+		opacity: 0
+	
+buttonConfirm.states.add
+	clicked:
+		html: ''
+		borderRadius: 40
+		width: 40
+		x: (view.width - 40) / 2
+buttonConfirm.states.animationOptions =
+    curve:"ease-in-out"
+    delay: 0
+    time: 0.4
+
+checkmark = $.checkmark
+checkmark.superLayer = buttonConfirm
+checkmark.y = 100
+checkmark.x = 10
+
+checkmark.states.add
+	active:
+		y: 10
+		opacity: 1
+checkmark.states.animationOptions =
+    curve:"spring(200,15,0)"
+
+# moves facebook and 'or' section from view
+userNameOptions = $.usernameoptions
+userNameOptions.states.add
+	off: 
+		opacity: 0
+
+# moves password section from view		
+passwordHeader = $.header
+passwordHeader.superLayer = view
+passwordHeader.x = 1
+passwordHeader.y = 0
+passwordHeader.opacity = 0
+passwordHeader.scale - 0.5
+passwordHeader.centerX = 0.5
+passwordHeader.centerY = 0.5
+passwordHeader.states.add
+	on:
+		y: 0
+		opacity: 1
+		scale: 1
+		 		
 # Set the value, focus and listen for changes
 inputElement.placeholder = "Enter your username or email"
 inputElement.type = "Username"
@@ -69,23 +165,21 @@ inputElement.value = ""
 inputElement.focus()
 
 error = () ->
-	shake logincontainer
+	shake view
 	textInputLayer.states.switch('error')
 	
 username = () ->
-	$.left.states.switch('default')
-	logincontainer.states.switch('default')
-	inputsFirst.states.switch('default')
-	inputsSecond.states.switch('default')
+	viewHeading.states.switchInstant('userHeading')
+	userNameOptions.states.switchInstant('default')
+	passwordHeader.states.switchInstant('default')
 	textInputLayer.states.switch('default')
 	this.placeholder = "Enter your username or email"
 	inputElement.type = "username"
 	
 password = () ->
-	$.left.states.switch('off')
-	logincontainer.states.switch('on')
-	inputsFirst.states.switch('off')
-	inputsSecond.states.switch('off')
+	viewHeading.states.switchInstant('passwordHeading')
+	userNameOptions.states.switchInstant('off')
+	passwordHeader.states.switch('on')
 	this.placeholder = "Enter your password"
 	inputElement.type = "password"
 
@@ -102,20 +196,33 @@ inputElement.onkeyup = (e) ->
 			inputType = "password"
 			if inputType is "password"
 				password()
+				inputLabel.states.switch('default')
 		else if inputType is "password"
-			username()
-			inputType = "username"
+			buttonText.states.switchInstant('hidden')
+			checkmark.states.switch('active')
+			buttonConfirm.states.switch('clicked')
+			inputType = "password"
+			buttonConfirm.on Events.AnimationEnd, ->
+				username()
+				inputType = "username"
+				this.states.switch('default')
+				checkmark.states.switch('default')
+				buttonText.states.switchInstant('default')
 		else if inputType is "username"
 			error()
 		false
-	
 		# Clear the value
 		inputElement.value = ""
-					
+	
+	# show/hide label based on input type and entry
+	if inputType is "username"
+		inputLabel.states.switchInstant('userNameLabel')
+	if inputType is "password"
+		inputLabel.states.switchInstant('passwordLabel')
+	if inputElement.value.length <= 0
+		inputLabel.states.switchInstant('default')
 
 textInputLayer._element.appendChild(inputElement)
-$.btnreturn.on Events.Click, ->
-	username()
 
 # shake animation
 shake = (view, times=5) ->
@@ -158,7 +265,3 @@ shake = (view, times=5) ->
         time: 0.1
    
   right.start()
-
-
-
-
