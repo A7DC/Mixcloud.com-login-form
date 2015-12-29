@@ -6,21 +6,46 @@ Utils.insertCSS('@import url(https://fonts.googleapis.com/css?family=Open+Sans:6
 
 # background layer
 bg = new BackgroundLayer
-	backgroundColor: '314359'
+	image: 'images/bg-dark.png'
+	
+bg.states.add
+	loggedin:
+		image: 'images/bg-mixcloud--logged-in.png'
 
 # view positioning
 view = $.view
 view.x = 0
+view.y = 142
 
-# center the view
-view.center()
+viewEnd = new Animation
+    layer: view
+    properties:
+        y: -view.height
+    delay: 1
+    curve: "spring-dho(800, 200, 10, 0.01)"
+    
+viewEnd.on Events.AnimationEnd, ->
+	bg.states.switchInstant('loggedin')
+
+view.states.add
+	off:
+		y: -view.height
+		opacity: 0
+view.states.animationOptions =
+	curve:"spring(50,15,0)"
+
+view.centerX()
+
+$.btngroup.superLayer = view
+$.btngroup.y = 330
+$.btngroup.centerX()
 
 # Create the title for the current view
 viewHeading = new Layer
 	width: view.width
 	superLayer: view
 	height: 40
-	y: $.main.minY - 85
+	y: $.main.minY - 45
 	backgroundColor: bg.backgroundColor
 	html: "Choose how to login"
 
@@ -37,7 +62,7 @@ viewHeading.states.add
 # Create the input for username and password
 textInputLayer = new Layer 
 	x: 37
-	y: $.or.maxY + 40
+	y: $.or.maxY + 60
 	width: 258
 	height: 40
 	superLayer: view
@@ -96,13 +121,15 @@ buttonConfirm = new Layer
 	size: textInputLayer.size
 	y: textInputLayer.maxY + 20
 	x: textInputLayer.x
-	# is not the correct colour. inspect later
-	backgroundColor: '#589FC3'
+	backgroundColor: '#D3D3D3'
+	borderRadius: 2
 	
 buttonText = new Layer
 	size: buttonConfirm.size
 	superLayer: buttonConfirm
 	html: 'Confirm'
+	backgroundColor: buttonConfirm.backgroundColor
+	color: 'rgba(0,0,0,0.5)'
 	
 buttonText.style =
 	'padding': '8px 0 0 0'
@@ -111,15 +138,18 @@ buttonText.style =
 	'font-weight': 'bold'
 	
 buttonText.states.add
+	active:
+		backgroundColor: '#589FC3'
+		color: 'white'
 	hidden:
 		opacity: 0
 	
 buttonConfirm.states.add
-	clicked:
-		html: ''
+	active:
 		borderRadius: 40
 		width: 40
 		x: (view.width - 40) / 2
+		backgroundColor: '#589FC3'
 buttonConfirm.states.animationOptions =
     curve:"ease-in-out"
     delay: 0
@@ -164,50 +194,55 @@ inputElement.type = "Username"
 inputElement.value = ""
 inputElement.focus()
 
+# when there's an error, shake!
 error = () ->
 	shake view
 	textInputLayer.states.switch('error')
-	
+
+# username screen	
 username = () ->
 	viewHeading.states.switchInstant('userHeading')
 	userNameOptions.states.switchInstant('default')
-	passwordHeader.states.switchInstant('default')
 	textInputLayer.states.switch('default')
-	this.placeholder = "Enter your username or email"
+	inputElement.placeholder = "Enter your username or email"
 	inputElement.type = "username"
 	
+# password screen
 password = () ->
 	viewHeading.states.switchInstant('passwordHeading')
 	userNameOptions.states.switchInstant('off')
 	passwordHeader.states.switch('on')
-	this.placeholder = "Enter your password"
+	inputElement.placeholder = "Enter your password"
 	inputElement.type = "password"
+	textInputLayer.states.switch('default')
+
+# when user is logged in	
+loggedin = () ->
+	buttonText.destroy()
+	buttonConfirm.states.switch('active')
+	checkmark.states.switch('active')
+	buttonConfirm.on Events.AnimationEnd, ->
+	viewEnd.start()
 
 inputElement.onkeyup = (e) ->
+	input = inputElement.value
+	# returns input to default state when typing
 	textInputLayer.states.switch('default')
 	# if user presses enter/return
 	if e.keyCode is 13
-		# Set the textvalue
-		textVal = inputElement.value
 		# email verification 
-		input = inputElement.value
-		if input.indexOf("@") > 0
+		if input.indexOf("@") > 0	
 			input
 			inputType = "password"
 			if inputType is "password"
 				password()
 				inputLabel.states.switch('default')
 		else if inputType is "password"
-			buttonText.states.switchInstant('hidden')
-			checkmark.states.switch('active')
-			buttonConfirm.states.switch('clicked')
 			inputType = "password"
-			buttonConfirm.on Events.AnimationEnd, ->
-				username()
-				inputType = "username"
-				this.states.switch('default')
-				checkmark.states.switch('default')
-				buttonText.states.switchInstant('default')
+			if inputElement.value.length <= 6
+				error()
+			else
+				loggedin()
 		else if inputType is "username"
 			error()
 		false
@@ -215,10 +250,19 @@ inputElement.onkeyup = (e) ->
 		inputElement.value = ""
 	
 	# show/hide label based on input type and entry
+	# ensure button is in an active or inactive state
 	if inputType is "username"
 		inputLabel.states.switchInstant('userNameLabel')
+		if input.indexOf("@") > 0
+			buttonText.states.switchInstant('active')
+		else
+			buttonText.states.switchInstant('default')
 	if inputType is "password"
 		inputLabel.states.switchInstant('passwordLabel')
+		if inputElement.value.length >= 6
+			buttonText.states.switchInstant('active')
+		else 
+			buttonText.states.switchInstant('default')
 	if inputElement.value.length <= 0
 		inputLabel.states.switchInstant('default')
 

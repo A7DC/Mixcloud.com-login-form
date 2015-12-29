@@ -525,200 +525,83 @@ window.__imported__["mixcloudframer/layers.json.js"] = [
             {
                 "children": [
                     {
-                        "children": [], 
-                        "id": "E86BA8D2-6BB3-4171-8E09-BB9974D5FD7D", 
-                        "image": {
-                            "frame": {
-                                "height": 40, 
-                                "width": 258, 
-                                "x": 2138, 
-                                "y": 80
-                            }, 
-                            "path": "images/Layer-btnfacebook-E86BA8D2-6BB3-4171-8E09-BB9974D5FD7D.png"
-                        }, 
-                        "imageType": "png", 
-                        "layerFrame": {
-                            "height": 40, 
-                            "width": 258, 
-                            "x": 2138, 
-                            "y": 80
-                        }, 
-                        "maskFrame": null, 
-                        "name": "btnfacebook", 
-                        "visible": true
-                    }, 
-                    {
-                        "children": [], 
-                        "id": "99E34106-68B6-4CB3-9AED-5522F2BC4578", 
-                        "image": {
-                            "frame": {
-                                "height": 40, 
-                                "width": 330, 
-                                "x": 2102, 
-                                "y": 144
-                            }, 
-                            "path": "images/Layer-or-99E34106-68B6-4CB3-9AED-5522F2BC4578.png"
-                        }, 
-                        "imageType": "png", 
-                        "layerFrame": {
-                            "height": 40, 
-                            "width": 330, 
-                            "x": 2102, 
-                            "y": 144
-                        }, 
-                        "maskFrame": null, 
-                        "name": "or", 
-                        "visible": true
-                    }, 
-                    {
-                        "children": [], 
-                        "id": "D3A60CE9-E568-41D4-A84A-C853DF15C969", 
-                        "image": {
-                            "frame": {
-                                "height": 40, 
-                                "width": 258, 
-                                "x": 2138, 
-                                "y": 288
-                            }, 
-                            "path": "images/Layer-btnconfirm-D3A60CE9-E568-41D4-A84A-C853DF15C969.png"
-                        }, 
-                        "imageType": "png", 
-                        "layerFrame": {
-                            "height": 40, 
-                            "width": 258, 
-                            "x": 2138, 
-                            "y": 288
-                        }, 
-                        "maskFrame": null, 
-                        "name": "btnconfirm", 
-                        "visible": true
-                    }, 
-                    {
                         "children": [
                             {
-                                "children": [
-                                    {
-                                        "children": [], 
-                                        "id": "A0A6F67A-14F1-490D-A67C-5BC67FD42A7D", 
-                                        "image": {
-                                            "frame": {
-                                                "height": 16, 
-                                                "width": 16, 
-                                                "x": 2150, 
-                                                "y": 235
-                                            }, 
-                                            "path": "images/Layer-Layer_1-A0A6F67A-14F1-490D-A67C-5BC67FD42A7D.png"
-                                        }, 
-                                        "imageType": "png", 
-                                        "layerFrame": {
-                                            "height": 16, 
-                                            "width": 16, 
-                                            "x": 2150, 
-                                            "y": 235
-                                        }, 
-                                        "maskFrame": null, 
-                                        "name": "Layer1", 
-                                        "visible": true
-                                    }
-                                ], 
-                                "id": "FADAB7E1-0990-4B26-B795-FD6F199DF1F8", 
+                                "children": [], 
+                                "id": "3217BB56-1161-4ABF-B6B5-63B349CE28CA", 
+                                "image": {
+                                    "frame": {
+                                        "height": 16, 
+                                        "width": 10, 
+                                        "x": 1709, 
+                                        "y": -98
+                                    }, 
+                                    "path": "images/Layer-Layer_1-3217BB56-1161-4ABF-B6B5-63B349CE28CA.png"
+                                }, 
                                 "imageType": "png", 
                                 "layerFrame": {
                                     "height": 16, 
-                                    "width": 16, 
-                                    "x": 2150, 
-                                    "y": 235
+                                    "width": 10, 
+                                    "x": 1709, 
+                                    "y": -98
                                 }, 
                                 "maskFrame": null, 
-                                "name": "person", 
+                                "name": "Layer1", 
                                 "visible": true
                             }
                         ], 
-                        "id": "A5134EDB-4230-47D6-BE84-FFFD80BBFE6F", 
-                        "image": {
-                            "frame": {
-                                "height": 58, 
-                                "width": 258, 
-                                "x": 2138, 
-                                "y": 206
-                            }, 
-                            "path": "images/Layer-input_copy-A5134EDB-4230-47D6-BE84-FFFD80BBFE6F.png"
-                        }, 
+                        "id": "BC3734CF-555B-4C8F-B3F0-CF74EFF2D5DC", 
                         "imageType": "png", 
                         "layerFrame": {
-                            "height": 58, 
-                            "width": 258, 
-                            "x": 2138, 
-                            "y": 206
+                            "height": 16, 
+                            "width": 10, 
+                            "x": 1709, 
+                            "y": -98
                         }, 
                         "maskFrame": null, 
-                        "name": "inputcopy", 
+                        "name": "iosarrowback", 
                         "visible": true
                     }
                 ], 
-                "id": "C467DDED-24E3-4CC0-A265-F4C297C4B94A", 
+                "id": "04CDAA15-B953-4E2C-9E52-C1D3BA8FFE36", 
                 "image": {
                     "frame": {
-                        "height": 309, 
-                        "width": 332, 
-                        "x": 2101, 
-                        "y": 56
+                        "height": 16, 
+                        "width": 60, 
+                        "x": 1709, 
+                        "y": -98
                     }, 
-                    "path": "images/Layer-main-C467DDED-24E3-4CC0-A265-F4C297C4B94A.png"
+                    "path": "images/Layer-btnreturn-04CDAA15-B953-4E2C-9E52-C1D3BA8FFE36.png"
                 }, 
                 "imageType": "png", 
                 "layerFrame": {
-                    "height": 309, 
-                    "width": 332, 
-                    "x": 2101, 
-                    "y": 56
+                    "height": 16, 
+                    "width": 60, 
+                    "x": 1709, 
+                    "y": -98
                 }, 
                 "maskFrame": null, 
-                "name": "main", 
+                "name": "btnreturn", 
                 "visible": true
-            }
-        ], 
-        "id": "EC25D5DB-9DE5-4787-AFCB-5E499DF2054A", 
-        "image": {
-            "frame": {
-                "height": 351, 
-                "width": 332, 
-                "x": 2101, 
-                "y": 14
             }, 
-            "path": "images/Layer-copy-EC25D5DB-9DE5-4787-AFCB-5E499DF2054A.png"
-        }, 
-        "imageType": "png", 
-        "layerFrame": {
-            "height": 351, 
-            "width": 332, 
-            "x": 2101, 
-            "y": 14
-        }, 
-        "maskFrame": null, 
-        "name": "copy", 
-        "visible": true
-    }, 
-    {
-        "children": [
             {
                 "children": [], 
                 "id": "63D41690-694C-4B75-A8BF-9ACB3979A390", 
                 "image": {
                     "frame": {
-                        "height": 19, 
-                        "width": 69, 
-                        "x": 1828, 
-                        "y": -19
+                        "height": 23, 
+                        "width": 73, 
+                        "x": 1826, 
+                        "y": -21
                     }, 
                     "path": "images/Layer-name-63D41690-694C-4B75-A8BF-9ACB3979A390.png"
                 }, 
                 "imageType": "png", 
                 "layerFrame": {
-                    "height": 19, 
-                    "width": 69, 
-                    "x": 1828, 
-                    "y": -19
+                    "height": 23, 
+                    "width": 73, 
+                    "x": 1826, 
+                    "y": -21
                 }, 
                 "maskFrame": null, 
                 "name": "name", 
@@ -794,32 +677,17 @@ window.__imported__["mixcloudframer/layers.json.js"] = [
         "visible": true
     }, 
     {
-        "children": [
-            {
-                "children": [], 
-                "id": "AF0C49E2-6AD1-44A3-B61D-8E88B3E6DEBC", 
-                "image": {
-                    "frame": {
-                        "height": 19, 
-                        "width": 21, 
-                        "x": 2092, 
-                        "y": -41
-                    }, 
-                    "path": "images/Layer-Layer_1-AF0C49E2-6AD1-44A3-B61D-8E88B3E6DEBC.png"
-                }, 
-                "imageType": "png", 
-                "layerFrame": {
-                    "height": 19, 
-                    "width": 21, 
-                    "x": 2092, 
-                    "y": -41
-                }, 
-                "maskFrame": null, 
-                "name": "Layer1", 
-                "visible": true
-            }
-        ], 
+        "children": [], 
         "id": "88BBC470-8DE9-417E-A56D-56E043C19E9E", 
+        "image": {
+            "frame": {
+                "height": 19, 
+                "width": 21, 
+                "x": 2092, 
+                "y": -41
+            }, 
+            "path": "images/Layer-checkmark-88BBC470-8DE9-417E-A56D-56E043C19E9E.png"
+        }, 
         "imageType": "png", 
         "layerFrame": {
             "height": 19, 
@@ -829,6 +697,29 @@ window.__imported__["mixcloudframer/layers.json.js"] = [
         }, 
         "maskFrame": null, 
         "name": "checkmark", 
+        "visible": true
+    }, 
+    {
+        "children": [], 
+        "id": "82560B3B-FB3F-4DC3-AB67-F34A7470B803", 
+        "image": {
+            "frame": {
+                "height": 13, 
+                "width": 203, 
+                "x": 1761, 
+                "y": 377
+            }, 
+            "path": "images/Layer-btngroup-82560B3B-FB3F-4DC3-AB67-F34A7470B803.png"
+        }, 
+        "imageType": "png", 
+        "layerFrame": {
+            "height": 13, 
+            "width": 203, 
+            "x": 1761, 
+            "y": 377
+        }, 
+        "maskFrame": null, 
+        "name": "btngroup", 
         "visible": true
     }
 ]
