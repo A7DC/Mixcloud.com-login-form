@@ -187,6 +187,10 @@ passwordHeader.states.add
 		y: 0
 		opacity: 1
 		scale: 1
+		
+# return button
+$.btnreturn.on Events.Click, ->
+	username()
 		 		
 # Set the value, focus and listen for changes
 inputElement.placeholder = "Enter your username or email"
@@ -206,6 +210,7 @@ username = () ->
 	textInputLayer.states.switch('default')
 	inputElement.placeholder = "Enter your username or email"
 	inputElement.type = "username"
+	passwordHeader.states.switchInstant('default')
 	
 # password screen
 password = () ->
@@ -265,17 +270,18 @@ inputElement.onkeyup = (e) ->
 			buttonText.states.switchInstant('default')
 	if inputElement.value.length <= 0
 		inputLabel.states.switchInstant('default')
-
+	
 textInputLayer._element.appendChild(inputElement)
 
 # shake animation
-shake = (view, times=5) ->
+shake = (main, times=5) ->
   i = 0
 	
   right = new Animation
     layer: view
     properties: 
       x: view.x + 4
+      rotationX: 7
     curve: "bezier-curve"
     time: 0.08
 		
@@ -283,6 +289,7 @@ shake = (view, times=5) ->
     layer: view
     properties: 
       x: view.x - 4
+      rotationX: 7
     curve: "bezier-curve"
     time: 0.08
 
