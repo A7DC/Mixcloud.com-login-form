@@ -7,6 +7,7 @@ Utils.insertCSS('@import url(https://fonts.googleapis.com/css?family=Open+Sans:6
 # background layer
 bg = new BackgroundLayer
 	image: 'images/bg-dark.png'
+# 	backgroundColor: '#314359'
 	
 bg.states.add
 	loggedin:
@@ -59,6 +60,9 @@ viewHeading.states.add
 	userHeading:
 		html: "Choose how to login"
 
+# Code for input elements taken from:
+# http://framerjs.com/examples/preview/#chat-bubbles.framer
+# Thanks to Ed Chao and Koen Bok!
 # Create the input for username and password
 textInputLayer = new Layer 
 	x: 37
@@ -101,8 +105,6 @@ textInputLayer.ignoreEvents = false
 textInputLayer.states.add
 	error:
 		borderColor: "red"
-			
-textInputLayer.style = {"border" : "1px solid #D3D3D3"}
 
 # This creates a text input and adds some styling in plain JS
 inputElement = document.createElement("input")
@@ -191,7 +193,7 @@ passwordHeader.states.add
 # return button
 $.btnreturn.on Events.Click, ->
 	username()
-		 		
+
 # Set the value, focus and listen for changes
 inputElement.placeholder = "Enter your username or email"
 inputElement.type = "Username"
@@ -241,7 +243,6 @@ inputElement.onkeyup = (e) ->
 			inputType = "password"
 			if inputType is "password"
 				password()
-				inputLabel.states.switch('default')
 		else if inputType is "password"
 			inputType = "password"
 			if inputElement.value.length <= 6
